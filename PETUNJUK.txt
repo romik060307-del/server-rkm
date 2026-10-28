@@ -1,0 +1,28 @@
+RKM SERVER + RKM CHAT — CARA MEMBUAT APK
+
+Yang didapat:
+- APK Android bernama RKM Server (dibangun melalui GitHub Actions).
+- Web chat RKM Chat tersimpan di APK dan dilayani langsung oleh tablet pada port 8080.
+- Akun nomor HP + sandi, profil dan foto profil, kontak lokal per browser, chat pribadi, kirim gambar, edit/hapus pesan teks, status teks 24 jam, sinyal panggilan suara WebRTC, riwayat panggilan lokal.
+
+LANGKAH GITHUB (gunakan repository RK Server yang sudah kamu pakai):
+1. Unduh RKM-Server-Source.zip.
+2. Unggah ZIP ke root repository. Jika workflow lama hanya mengenali nama RK-Server-Source.zip, ganti nama file upload menjadi RK-Server-Source.zip.
+3. Unduh RKM-Server-build-apk.yml. Di GitHub, buka folder .github/workflows, lalu ganti isi build-apk.yml dengan isi file workflow itu. Jika folder itu belum ada, buat .github lalu workflows, lalu upload file sebagai build-apk.yml.
+4. Commit perubahan. Buka tab Actions, pilih Build RKM Server APK, tekan Run workflow. Jika job build hijau, unduh artifact RKM-Server-APK.
+5. Ekstrak artifact dan instal app-debug.apk ke tablet Advan. Package ID dipertahankan com.rk.server agar bisa memperbarui pemasangan lama tanpa mengganti identitas aplikasi.
+
+MENJALANKAN:
+1. Buka aplikasi RKM Server di tablet lalu tekan MULAI SERVER.
+2. Uji alamat lokal yang ditampilkan (misalnya http://192.168.1.5:8080/) dari browser HP yang berada di Wi-Fi yang sama.
+3. Biarkan RK Tunnel Lite aktif dengan target port lokal 8080 yang sudah berhasil kamu gunakan sebelumnya. Tidak perlu membuat server/VPS tambahan.
+4. Buka tautan HTTPS publik trycloudflare.com yang terbaru. Web RKM Chat dilayani langsung oleh aplikasi RKM Server. Jangan membuka file RKM-Chat-Web.html dari penyimpanan sebagai situs; file itu salinan/backup web. Pakai alamat server lokal atau tautan tunnel.
+5. Di HP pertama pilih Buat akun: nomor berbeda 8–15 angka, nama, kata sandi minimal 6 karakter. Di HP kedua buat akun dengan nomor berbeda. Kemudian tambahkan nomor teman dari tombol + pada web.
+6. Untuk panggilan suara, gunakan web dari tautan HTTPS, izinkan mikrofon, dan biarkan kedua tab terbuka. Jaringan tertentu memerlukan TURN relay sehingga panggilan bisa gagal pada jaringan tertentu; chat teks/gambar tidak bergantung pada WebRTC.
+
+CATATAN:
+- Ini proyek sumber, bukan APK siap-instal yang sudah diuji. Build APK dilakukan oleh GitHub Actions.
+- Data akun, pesan, gambar, status, foto profil tersimpan pada penyimpanan privat aplikasi di tablet. Jangan uninstall atau hapus data aplikasi jika belum punya backup.
+- Kontak dan riwayat panggilan disimpan lokal di browser masing-masing HP. Jika tautan Cloudflare berubah, pengguna mungkin harus masuk lagi dan kontak lokal di origin lama tidak ikut pindah.
+- Status yang didukung saat ini berupa teks; gambar dapat dikirim dalam chat dan dipasang sebagai foto profil.
+- Belum ada enkripsi end-to-end atau audit keamanan profesional. Gunakan sandi unik dan jangan kirim data sangat sensitif.
